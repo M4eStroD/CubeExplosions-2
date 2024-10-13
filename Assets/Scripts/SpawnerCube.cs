@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class SpawnerCubes : MonoBehaviour
+public class SpawnerCube : MonoBehaviour
 {
     [SerializeField] private Exploder _explodeCube;
     [SerializeField] private Renderer _renderer;
@@ -42,9 +42,9 @@ public class SpawnerCubes : MonoBehaviour
 
         position = transform.TransformPoint(transform.position);
 
-        var cube = Instantiate(_cube, position, transform.rotation);
+        Cube cube = Instantiate(_cube, position, transform.rotation);
 
-        cube.Initialize(_cube.ChanceCrash/degreeReduction);
+        cube.Initialize(_cube.CrashChance/degreeReduction);
         cube.transform.localScale = transform.localScale / degreeScale;
     }
 }
