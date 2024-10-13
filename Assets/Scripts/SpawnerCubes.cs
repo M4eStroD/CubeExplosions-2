@@ -2,21 +2,21 @@ using UnityEngine;
 
 public class SpawnerCubes : MonoBehaviour
 {
-    [SerializeField] private Explosion _explodeCube;
+    [SerializeField] private Exploder _explodeCube;
     [SerializeField] private Renderer _renderer;
 
     [SerializeField] private int _minCubes = 2;
     [SerializeField] private int _maxCubes = 5;
 
-    private GameObject _cube;
+    private Cube _cube;
 
-    private void Start()
+    public void Initialize(Cube cube)
     {
-        _cube = _explodeCube.gameObject;
-        _renderer.material.color = Random.ColorHSV();
+        _cube = cube;
+        SpawnCube();
     }
 
-    public void SpawnCube()
+    private void SpawnCube()
     {
         int randomCount = Random.Range(_minCubes, _maxCubes + 1);
 
@@ -28,6 +28,8 @@ public class SpawnerCubes : MonoBehaviour
 
     private void GenerateCube()
     {
+        int degreeReduction = 2;
+        
         float offsetMin = -0.5f;
         float offsetMax = 1.5f;
 
@@ -42,6 +44,7 @@ public class SpawnerCubes : MonoBehaviour
 
         var cube = Instantiate(_cube, position, transform.rotation);
 
+        cube.Initialize(_cube.ChanceCrash/degreeReduction);
         cube.transform.localScale = transform.localScale / degreeScale;
     }
 }
